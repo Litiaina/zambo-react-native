@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Button, Alert, ImageBackground } from 'react-native';
 
-export default function App() {
+const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Perform your login logic here
     if (username === 'admin' && password === 'password') {
       Alert.alert('Login Successful');
     } else {
@@ -15,33 +14,38 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        placeholderTextColor="white"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="white"
-        secureTextEntry
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-      />
-      <Button title="Login" onPress={handleLogin} style={styles.button} color="grey" />
-    </View>
+    <ImageBackground source={require('./assets/Litiaina_Cover_Art.png')} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="white"
+          onChangeText={text => setUsername(text)}
+          value={username}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="white"
+          secureTextEntry
+          onChangeText={text => setPassword(text)}
+          value={password}
+        />
+        <Button title="Login" onPress={handleLogin} style={styles.button} color="grey" />
+      </View>
+    </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 16,
   },
   input: {
@@ -58,3 +62,5 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 });
+
+export default App;
